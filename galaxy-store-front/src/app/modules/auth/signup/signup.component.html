@@ -1,100 +1,144 @@
-<!-- dashboard -->
-<div class="container my-container">
-  <div class="dashboard">
-      <div class="row">
-          <div class="col-12 text-center">
-              <h3>Create a new account</h3>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-md-8 offset-md-2 text-center login" style="padding-bottom:40px">
-              <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="submitSignup()">
-                  <div class="form-group text-left">
-                      <input type="text" 
-                      formControlName="firstname"
-                      class="form-control"
-                      placeholder="Firstname">
-                      <div class="invalid" 
-                      *ngIf="(form.get('firstname').invalid && form.get('firstname').touched) || 
-                      (form.get('firstname').invalid && ngForm.submitted)">
-                          <span *ngIf="form.get('firstname').errors.required">Firstname is Required</span>
-                          <span *ngIf="form.get('firstname').errors.minlength">Firstname must be at least 4 chars. </span>
-                          <span *ngIf="form.get('firstname').errors.pattern">Firstname should be string</span>
-                      </div>
-                  </div>
-
-
-                  <div class="form-group text-left">
-                      <input type="text" 
-                      formControlName="lastname"
-                      class="form-control"
-                      placeholder="Lastname">
-                      <div class="invalid"
-                      *ngIf="(form.get('lastname').invalid && form.get('lastname').touched) || 
-                      (form.get('lastname').invalid && ngForm.submitted)">
-                      <span *ngIf="form.get('lastname').errors.required">lastname is Required</span>
-                      <span *ngIf="form.get('lastname').errors.minlength">lastname must be at least 4 chars</span>
-                      </div>
-                  </div>
-
-
-
-                  <div class="form-group text-left">
-                      <input type="email" 
-                      formControlName="email"
-                      class="form-control"
-                      placeholder="Email Address">
-                      <div class="invalid" 
-                      *ngIf="(form.get('email').invalid && form.get('email').dirty) || 
-                      (form.get('email').invalid && ngForm.submitted)">
-                        <span *ngIf="form.get('email').errors.required">E-mail is Required</span>
-                        <span *ngIf="form.get('email').errors.email">E-mail not valid!</span>
-                        <span *ngIf="form.get('email').errors.emailExist">E-mail is already Exist.</span>
-                      </div>
-                  </div> 
-
-
-
-                  <div class="form-group text-left">
-                      <input type="password" 
-                      formControlName="password"
-                      class="form-control"  
-                      placeholder="Password">
-                      <div class="invalid" 
-                      *ngIf="(form.get('password').invalid && form.get('password').dirty) || 
-                      (form.get('password').invalid && ngForm.submitted)">
-                        <span *ngIf="form.get('password').errors.required">Password is Required</span>
-                        <span *ngIf="form.get('password').errors.minlength">Password must be at least 6 length</span>
-                      </div>
-                  </div>
-
-
-
-                  <div class="form-group text-left">
-                      <input type="password" 
-                      formControlName="confirmPassword"
-                      class="form-control" 
-                      placeholder="Confirm Password">
-                      <div class="invalid" 
-                      *ngIf="(form.get('confirmPassword').invalid && form.get('confirmPassword').touched) || 
-                      (form.get('confirmPassword').invalid && ngForm.submitted)">
-                      <span *ngIf="form.get('confirmPassword').errors.required">Confirm Password is Required</span>
-                        <span *ngIf="form.get('confirmPassword').errors.minlength">Confirm Password must be at least 6 length</span>
-                      </div>
-                      <div class="invalid"
-                      *ngIf="form.errors?.matchPassword && (form.get('confirmPassword').touched || ngForm.submitted) 
-                      && form.get('password').valid && form.get('confirmPassword').valid">
-                        <span *ngIf="form.errors?.matchPassword">Confirm Password not match</span>
-                      </div>
-                  </div>
-                  
-                  <div class="clearfix"></div>
-                  <button type="submit" class="btn btn-primary submit"
-                  [disabled]="isLoading">{{ isLoading ? 'Loading...' : 'Register' }}</button>
-              </form>
-          </div>
-          
-          
-      </div> 
+<!-- breadcrumb area start -->
+<section class="breadcrumb__area pt-160 pb-40 p-relative">
+  <div class="breadrumb__shape">
+    <img class="breadcrumb__shape-1" src="assets/img/breadcrumb/breadcrumb-shape-1.png" alt="">
   </div>
-</div>
+</section>
+<!-- breadcrumb area end -->
+
+<section class="login__area pb-120">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xxl-6 col-xl-6 col-lg-8">
+        <div class="login__wrapper">
+          <div class="login__shape">
+            <img class="login__shape-1" src="assets/img/login/login-person.png" alt="">
+            <img class="login__shape-2" src="assets/img/login/login-shape-1.png" alt="">
+            <img class="login__shape-3" src="assets/img/login/login-shape-2.png" alt="">
+            <img class="login__shape-4" src="assets/img/login/login-shape-3.png" alt="">
+          </div>
+          <div class="login__top text-center">
+            <h3>Register</h3>
+            <p>Already have an account? <a [routerLink]="['/auth/login']">Sign in </a></p>
+          </div>
+          <div class="login__form">
+            <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="submitSignup()">
+
+              <div class="login__input-box">
+                <div class="login__input-title">
+                  <h4>Enter first name <span>*</span></h4>
+                </div>
+                <div class="login__input">
+                  <input type="text" placeholder="Your first name" formControlName="firstname">
+                  <span class="login__input-icon">
+                             <i class="fa-solid fa-user"></i>
+                          </span>
+                  <div class="invalid"
+                       *ngIf="(form.get('firstname').invalid && form.get('firstname').touched) ||
+                      (form.get('firstname').invalid && ngForm.submitted)">
+                    <span *ngIf="form.get('firstname').errors.required">Firstname is Required</span>
+                    <span *ngIf="form.get('firstname').errors.minlength">Firstname must be at least 4 chars. </span>
+                    <span *ngIf="form.get('firstname').errors.pattern">Firstname should be string</span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="login__input-box">
+                <div class="login__input-title">
+                  <h4>Enter last name <span>*</span></h4>
+                </div>
+                <div class="login__input">
+                  <input type="text" placeholder="Your last name" formControlName="lastname">
+                  <span class="login__input-icon">
+                             <i class="fa-solid fa-user"></i>
+                          </span>
+                  <div class="invalid"
+                       *ngIf="(form.get('firstname').invalid && form.get('firstname').touched) ||
+                      (form.get('firstname').invalid && ngForm.submitted)">
+                    <span *ngIf="form.get('firstname').errors.required">Firstname is Required</span>
+                    <span *ngIf="form.get('firstname').errors.minlength">Firstname must be at least 4 chars. </span>
+                    <span *ngIf="form.get('firstname').errors.pattern">Firstname should be string</span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="login__input-box">
+                <div class="login__input-title">
+                  <h4>Enter email <span>*</span></h4>
+                </div>
+                <div class="login__input">
+                  <input type="text" placeholder="Enter your email" formControlName="email">
+                  <span class="login__input-icon">
+                             <i class="fa-light fa-envelope"></i>
+                          </span>
+                  <div class="invalid"
+                       *ngIf="(form.get('email').invalid && form.get('email').dirty) ||
+                      (form.get('email').invalid && ngForm.submitted)">
+                    <span *ngIf="form.get('email').errors.required">E-mail is Required</span>
+                    <span *ngIf="form.get('email').errors.email">E-mail not valid!</span>
+                    <span *ngIf="form.get('email').errors.emailExist">E-mail is already Exist.</span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="login__input-box">
+                <div class="login__input-title">
+                <h4>Password <span>*</span></h4>
+                </div>
+                <div class="login__input">
+                  <input  [type]="this.showPassword?'text':'password'" placeholder="Enter your password" formControlName="password">
+                  <span class="login__input-icon">
+                             <i class="fa-light fa-lock"></i>
+                          </span>
+                  <span class="login__input-password-visible" (click)="displayPassword()">
+                             <i class="fa-light fa-eye"></i>
+                          </span>
+
+                  <div class="invalid"
+                       *ngIf="(form.get('password').invalid && form.get('password').dirty) ||
+                      (form.get('password').invalid && ngForm.submitted)">
+                    <span *ngIf="form.get('password').errors.required">Password is Required</span>
+                    <span *ngIf="form.get('password').errors.minlength">Password must be at least 6 length</span>
+                  </div>
+                </div>
+              </div>
+              <div class="login__input-box">
+                <div class="login__input">
+                  <input  [type]="this.showPassword?'text':'password'" placeholder="Confirm your password" formControlName="confirmPassword">
+                  <span class="login__input-icon">
+                             <i class="fa-light fa-lock"></i>
+                          </span>
+                  <span class="login__input-password-visible" (click)="displayPassword()">
+                             <i class="fa-light fa-eye"></i>
+                          </span>
+                  <div class="invalid"
+                       *ngIf="(form.get('confirmPassword').invalid && form.get('confirmPassword').touched) ||
+                      (form.get('confirmPassword').invalid && ngForm.submitted)">
+                    <span *ngIf="form.get('confirmPassword').errors.required">Confirm Password is Required</span>
+                    <span
+                      *ngIf="form.get('confirmPassword').errors.minlength">Confirm Password must be at least 6 length</span>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+              <div class="login__input-title d-flex align-items-center justify-content-between">
+                <div class="forgot-password">
+                  <a [routerLink]="['/auth/forget-password']">Forgot Password?</a>
+                </div>
+              </div>
+              <div class="login__btn mb-20">
+                <button class="tp-btn-4 w-100">register</button>
+              </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>

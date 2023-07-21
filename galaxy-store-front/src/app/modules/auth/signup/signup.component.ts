@@ -18,6 +18,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class SignupComponent implements OnInit {
   form: FormGroup | any;
   isLoading: boolean = false;
+  showPassword: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
@@ -55,6 +57,9 @@ export class SignupComponent implements OnInit {
         username: firstname+lastname,
         email: email,
         password: password,
+        firstName: firstname,
+        lastName: lastname,
+        role : 'USER',
       };
       this.authService.signup(signupData).subscribe((result: any) => {
         if (result) this.router.navigate(['/home']);
@@ -79,5 +84,9 @@ export class SignupComponent implements OnInit {
         }
       })
     );
+  }
+
+  displayPassword(){
+    this.showPassword = !this.showPassword;
   }
 }
